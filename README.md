@@ -5,4 +5,4 @@ You can check the [PHP app here][1] <br>
 
 
 
-[1]: <https://github.com/Almas-Ali/cv-builder-bd> "PHP CV Builder"
+[1]: <https://github.com/paliwaladitya2/crudstudentphp> "PHP CV Builder"
