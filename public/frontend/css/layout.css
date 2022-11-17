@@ -1,0 +1,189 @@
+body {
+  background-image: url("../img/theme_bg.jpg");
+}
+
+nav ul {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  margin: 0 0 30px 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #fff;
+  background-color: #41c2df;
+  padding: 8px 0;
+  z-index: 99;
+}
+
+.container-fluid {
+  margin-top: 90px;
+}
+
+nav ul li {
+  padding: 8px;
+  margin: 0 12px;
+  font-size: 18px;
+}
+
+nav ul li:hover {
+  background-color: #20b2aa;
+  border-radius: 12px;
+  transition: 0.2s ease-in;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+
+a.nav-link{
+    color: black; 
+}
+
+a:hover {
+  color: #fff;
+}
+
+.site-title {
+  border: 1px solid #000;
+  height: max-content;
+  width: max-content;
+  border-radius: 12px;
+  padding: 25px;
+  margin: 10px auto;
+  /* background-color: #0005; */
+  color: #000;
+  animation: bright 1s alternate-reverse infinite;
+}
+
+marquee {
+  background-color: #0005;
+  padding: 8px;
+  position: absolute;
+  bottom: 0;
+  color: #fff;
+}
+
+.brif {
+  font-size: 18px;
+  background-color: #0004;
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+  margin: 90px auto;
+  max-width: 800px;
+  width: 90%;
+}
+
+.contact {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.btn {
+  margin-top: 20px;
+  border-radius: 12px;
+  padding: 10px 40px;
+}
+
+.user-form {
+  background-color: #0005;
+  border-radius: 12px;
+  margin: 20px auto;
+  max-width: 800px;
+  width: 90%;
+  padding: 20px;
+  color: #fff;
+}
+
+.form-title {
+  text-transform: uppercase;
+}
+
+.ssc,
+.hsc,
+.diploma,
+.bsc,
+.msc {
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+
+.education h4 {
+  text-transform: uppercase;
+}
+
+.loader {
+  border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid pink;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 36%;
+  left: 46%;
+}
+
+.loader-back {
+  z-index: 9999;
+  display: block;
+  margin: auto;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  background: #fff;
+  position: fixed;
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+
+.loader .hidden {
+  animation: fadeOut 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bright {
+  0% {
+    color: #0fa;
+  }
+
+  100% {
+    color: #0fb;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  nav ul li {
+    padding: 4px;
+    margin: 0 6px;
+    font-size: 12px;
+  }
+
+}
