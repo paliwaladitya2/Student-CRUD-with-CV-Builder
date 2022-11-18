@@ -52,9 +52,6 @@
                     data: 'name',
                     name: 'name'
                 }, {
-                    data: 'status',
-                    name: 'status'
-                }, {
                     data: 'action',
                     name: 'action',
                     orderable: false,

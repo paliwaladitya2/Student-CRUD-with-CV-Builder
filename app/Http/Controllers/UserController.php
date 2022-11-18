@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use DataTables;
 use Illuminate\Http\Request;
+use DB;
 
 class UserController extends Controller
 {
@@ -17,7 +18,6 @@ class UserController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                 $actionBtn = '
-                        <a href="' . route('admin.users.view', $row->id) . '"><i class="fa fa-eye"></i></a>
                         <a href="' . route('admin.users.edit', $row->id) . '"><i class="fa fa-pencil"></i></a>
                         <a href="javascript:void(0)" id="' . $row->id . '" class="delete"><i class="fa fa-trash"></i></a>';
                 return $actionBtn;
@@ -33,9 +33,11 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return view('admin.users.create');
+        $department= DB::table('department')->get();
+        $campus= DB::table('campus')->get();
+        return view('admin.users.create',['user'=>$user,'department'=>$department,'campus'=>$campus]);
     }
 
     public function store(Request $request)
@@ -45,24 +47,20 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
+        $department = DB::table('department')->where('id',$request->department)->first();
+        $campus = $department->campus_id;
+        $user->campus_id = $campus;
+        $user->department_id = $request->department;
         $user->save();
-        $title1 = "Operation Successfull";
-        $message1 = "User has been created successfully";
-        $id1 = $user->id;
-        $notification_id1 = $user->notification_id;
-        $type1 = "basic";
-        send_notification_FCM($notification_id1, $title1, $message1, $id1,$type1);
         return redirect()->route('admin.users');
-    }
-    public function view(User $user)
-    {
-        return view('admin.users.view',['user'=>$user]);
     }
 
     public function edit($user)
     {
         $user = User::find($user);
-        return view('admin.users.edit',['user'=>$user]);
+        $department= DB::table('department')->get();
+        $campus= DB::table('campus')->get();
+        return view('admin.users.edit',['user'=>$user,'department'=>$department,'campus'=>$campus]);
     }
     public function update(Request $request, $id)
     {
@@ -75,6 +73,10 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name=$validatedData['name'];
         $user->role=$validatedData['role'];
+        $department = DB::table('department')->where('id',$request->department)->first();
+        $campus = $department->campus_id;
+        $user->campus_id = $campus;
+        $user->department_id = $request->department;
         $user->update();
         return redirect('admin/users/')->with('message','User updated successfully');
     }

@@ -14,7 +14,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <div class="card-header">
-            <h2>Add New HOD
+            <h2>Add New User
                 <a class="btn btn-primary float-end" href="{{ route('admin.users') }}"> Back</a></h2>
         </div>
         <div class="card-body">
@@ -30,13 +30,35 @@
                     </div>
                     <div class="col-xs12 col-sm-12 col-md-6 mt-2">
                         <div class="form-group">
-                            <strong>Department:</strong>
+                            <strong>Role:</strong>
                             <select name="role" id="role" class="form-control">
                                 <option value="">Select Role</option>
                                 <option value="admin">Admin</option>
                                 <option value="hod">HOD</option>
                                 <option value="faculty">Faculty</option>
                                 <option value="student">Student</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs12 col-sm-12 col-md-6 mt-2">
+                        <div class="form-group">
+                            <strong>Campus:</strong>
+                            <select name="campus" id="campus" class="form-control">
+                                <option value="">Select Campus</option>
+                                @foreach($campus as $cmp)
+                                    <option value="{{ $cmp->id }}">{{ $cmp->campus_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs12 col-sm-12 col-md-6 mt-2">
+                        <div class="form-group">
+                            <strong>Department:</strong>
+                            <select name="department" id="department" class="form-control">
+                                <option value="">Select Department</option>
+                                @foreach($department as $dpt)
+                                    <option value="{{ $dpt->id }}">{{ $dpt->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

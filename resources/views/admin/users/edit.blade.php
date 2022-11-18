@@ -14,45 +14,61 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <div class="card-header">
-            <h2>Add New HOD
+            <h2>Edit User
                 <a class="btn btn-primary float-end" href="{{ route('admin.users') }}"> Back</a></h2>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data" name="product_form" id="product_form" >
+            <form action="{{ route('admin.users.update',['id'=>$user->id]) }}" method="POST" enctype="multipart/form-data" name="product_form" id="product_form" >
                 @csrf
                 <h4>Basic Information</h4>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6 mt-2">
                         <div class="form-group">
                             <strong>Name:</strong>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Name">
+                            <input type="text" id="name" name="name" class="form-control" value="{{ $user->name }}">
+                        </div>
+                    </div>
+                    <div class="col-xs12 col-sm-12 col-md-6 mt-2">
+                        <div class="form-group">
+                            <strong>Role:</strong>
+                            <select name="role" id="role" class="form-control">
+                                <option value="">Select Role</option>
+                                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="hod" {{ $user->role == 'hod' ? 'selected' : '' }}>HOD</option>
+                                <option value="faculty" {{ $user->role == 'faculty' ? 'selected' : '' }}>Faculty</option>
+                                <option value="student" {{ $user->role == 'student' ? 'selected' : '' }}>Student</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs12 col-sm-12 col-md-6 mt-2">
+                        <div class="form-group">
+                            <strong>Campus:</strong>
+                            <select name="campus" id="campus" class="form-control">
+                                <option value="">Select Campus</option>
+                                @foreach($campus as $cmp)
+                                    {{-- <option value="{{ $cmp->id }}" {{ ( $user->campus_id == $cmp->$id ) ? 'selected' : '' }}>{{ $cmp->campus_name }}</option> --}}
+                                    <option value="{{ $cmp->id }}" {{ ( $user->campus_id == $cmp->id ) ? 'selected' : '' }}>{{ $cmp->campus_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-xs12 col-sm-12 col-md-6 mt-2">
                         <div class="form-group">
                             <strong>Department:</strong>
-                            <select name="role" id="role" class="form-control">
-                                <option value="">Select Role</option>
-                                <option value="admin">Admin</option>
-                                <option value="hod">HOD</option>
-                                <option value="faculty">Faculty</option>
-                                <option value="student">Student</option>
+                            <select name="department" id="department" class="form-control">
+                                <option value="">Select Department</option>
+                                @foreach($department as $dpt)
+                                    <option value="{{ $dpt->id }}" {{ ( $user->department_id ==$dpt->id ) ? 'selected' : '' }}>{{ $dpt->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
                         <div class="form-group">
                             <strong>Email:</strong>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                            <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}">
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                        <div class="form-group">
-                            <strong>Password:</strong>
-                            <input type="text" id="password" name="password" class="form-control" placeholder="Password">
-                        </div>
-                    </div>
-                    
                 </div>
                 
         </div>

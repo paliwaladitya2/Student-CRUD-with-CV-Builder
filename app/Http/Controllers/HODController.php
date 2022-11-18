@@ -9,16 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 class HODController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = User::where('role', 'hod')->get();
+    //         dd($data);
+    //         return DataTables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function ($row) {
+    //             $actionBtn = '
+    //                     <a href="' . route('admin.hod.view', $row->id) . '"><i class="fa fa-eye"></i></a>
+    //                     <a href="' . route('admin.hod.edit', $row->id) . '"><i class="fa fa-pencil"></i></a>
+    //                     <a href="javascript:void(0)" id="' . $row->id . '" class="delete"><i class="fa fa-trash"></i></a>';
+    //             return $actionBtn;
+    //         })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    //     }
+    //     return view('admin.hod.index');
+    // }
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('users')->where('role', 'hod')->get();
-            dd($data);
+            $data = User::latest()->where('role','hod')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                 $actionBtn = '
-                        <a href="' . route('admin.hod.view', $row->id) . '"><i class="fa fa-eye"></i></a>
                         <a href="' . route('admin.hod.edit', $row->id) . '"><i class="fa fa-pencil"></i></a>
                         <a href="javascript:void(0)" id="' . $row->id . '" class="delete"><i class="fa fa-trash"></i></a>';
                 return $actionBtn;
